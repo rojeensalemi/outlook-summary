@@ -7,7 +7,7 @@
     xsi:type="MailApp">
 
     <!-- Generate a new GUID for yourself: https://www.guidgenerator.com/ -->
-    <Id>REPLACE-WITH-GUID-E.G.-a1b2c3d4-5678-90ab-cdef-1234567890ab</Id>
+    <Id>REPLACE-WITH-GUID-E.G.-883ef8d9-c76f-4caa-b10d-d7e085c9a5c2</Id>
     <Version>1.0.0.0</Version>
     <ProviderName>Personal</ProviderName>
     <DefaultLocale>en-US</DefaultLocale>
@@ -86,13 +86,13 @@
         </Hosts>
         <Resources>
             <bt:Images>
-                <bt:Image id="Icon.16x16" DefaultValue="https://YOUR-GITHUB-USERNAME.github.io/outlook-summary/assets/icon-16.png"/>
-                <bt:Image id="Icon.32x32" DefaultValue="https://YOUR-GITHUB-USERNAME.github.io/outlook-summary/assets/icon-32.png"/>
-                <bt:Image id="Icon.80x80" DefaultValue="https://YOUR-GITHUB-USERNAME.github.io/outlook-summary/assets/icon-80.png"/>
+                <bt:Image id="Icon.16x16" DefaultValue="https://rojeensalemi.github.io/outlook-summary/assets/icon-16.png"/>
+                <bt:Image id="Icon.32x32" DefaultValue="https://rojeensalemi.github.io/outlook-summary/assets/icon-32.png"/>
+                <bt:Image id="Icon.80x80" DefaultValue="https://rojeensalemi.github.io/outlook-summary/assets/icon-80.png"/>
             </bt:Images>
             <bt:Urls>
-                <bt:Url id="Commands.Url" DefaultValue="https://YOUR-GITHUB-USERNAME.github.io/outlook-summary/commands.html"/>
-                <bt:Url id="Taskpane.Url" DefaultValue="https://YOUR-GITHUB-USERNAME.github.io/outlook-summary/taskpane.html"/>
+                <bt:Url id="Commands.Url" DefaultValue="https://rojeensalemi.github.io/outlook-summary/commands.html"/>
+                <bt:Url id="Taskpane.Url" DefaultValue="https://rojeensalemi.github.io/outlook-summary/taskpane.html"/>
             </bt:Urls>
             <bt:ShortStrings>
                 <bt:String id="GroupLabel" DefaultValue="AI Tools"/>
