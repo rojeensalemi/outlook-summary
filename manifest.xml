@@ -13,9 +13,9 @@
     <DefaultLocale>en-US</DefaultLocale>
     <DisplayName DefaultValue="Inbox Summary"/>
     <Description DefaultValue="AI summary and to-do list from your unread emails."/>
-    <IconUrl DefaultValue="https://YOUR-GITHUB-USERNAME.github.io/outlook-summary/assets/icon-80.png"/>
-    <HighResolutionIconUrl DefaultValue="https://YOUR-GITHUB-USERNAME.github.io/outlook-summary/assets/icon-80.png"/>
-    <SupportUrl DefaultValue="https://YOUR-GITHUB-USERNAME.github.io/outlook-summary/"/>
+    <IconUrl DefaultValue="https://rojeensalemi.github.io/outlook-summary/assets/icon-80.png"/>
+    <HighResolutionIconUrl DefaultValue="https://rojeensalemi.github.io/outlook-summary/assets/icon-80.png"/>
+    <SupportUrl DefaultValue="https://rojeensalemi.github.io/outlook-summary/"/>
 
     <AppDomains>
         <AppDomain>https://api.anthropic.com</AppDomain>
@@ -34,7 +34,7 @@
     <FormSettings>
         <Form xsi:type="ItemRead">
             <DesktopSettings>
-                <SourceLocation DefaultValue="https://YOUR-GITHUB-USERNAME.github.io/outlook-summary/taskpane.html"/>
+                <SourceLocation DefaultValue="https://rojeensalemi.github.io/outlook-summary/taskpane.html"/>
                 <RequestedHeight>450</RequestedHeight>
             </DesktopSettings>
         </Form>
