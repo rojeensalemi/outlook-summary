@@ -1,20 +1,30 @@
 // ============================================================
-// CONFIG — Replace ANTHROPIC_API_KEY with your real key
+// CONFIG — No API key here. It's loaded from Outlook roaming settings.
 // ============================================================
-const ANTHROPIC_API_KEY = "sk-ant-REPLACE-ME";
 const ANTHROPIC_MODEL = "claude-sonnet-4-5";
 const HOURS_BACK = 24;
 const MAX_EMAILS = 25;
 const BODY_CHAR_LIMIT = 1500;
+
+const SETTING_KEY = "anthropicApiKey";
 
 // ============================================================
 // Office.js initialization
 // ============================================================
 Office.onReady(() => {
     document.getElementById("refreshBtn").addEventListener("click", runSummary);
+    document.getElementById("settingsBtn").addEventListener("click", openSettings);
+    document.getElementById("cancelSettings").addEventListener("click", closeSettings);
+    document.getElementById("saveSettings").addEventListener("click", saveSettings);
+
     document.querySelectorAll(".tab").forEach(tab => {
         tab.addEventListener("click", () => switchTab(tab.dataset.pane));
     });
+
+    // If no key is saved yet, pop the settings dialog automatically
+    if (!getApiKey()) {
+        openSettings();
+    }
 });
 
 function switchTab(paneName) {
@@ -27,12 +37,52 @@ function switchTab(paneName) {
 }
 
 // ============================================================
+// API key storage (Outlook roaming settings)
+// ============================================================
+function getApiKey() {
+    return Office.context.roamingSettings.get(SETTING_KEY) || "";
+}
+
+function openSettings() {
+    document.getElementById("apiKeyInput").value = getApiKey();
+    document.getElementById("settingsOverlay").classList.add("show");
+    document.getElementById("apiKeyInput").focus();
+}
+
+function closeSettings() {
+    document.getElementById("settingsOverlay").classList.remove("show");
+}
+
+function saveSettings() {
+    const key = document.getElementById("apiKeyInput").value.trim();
+    if (!key) {
+        alert("Please enter an API key.");
+        return;
+    }
+    Office.context.roamingSettings.set(SETTING_KEY, key);
+    Office.context.roamingSettings.saveAsync((result) => {
+        if (result.status === Office.AsyncResultStatus.Succeeded) {
+            closeSettings();
+        } else {
+            alert("Failed to save key: " + (result.error && result.error.message));
+        }
+    });
+}
+
+// ============================================================
 // Main flow
 // ============================================================
 async function runSummary() {
     const btn = document.getElementById("refreshBtn");
     const summaryEl = document.getElementById("summary-content");
     const todoEl = document.getElementById("todo-content");
+
+    const apiKey = getApiKey();
+    if (!apiKey) {
+        summaryEl.innerHTML = '<div class="error">No API key set. Click the ⚙ button to add one.</div>';
+        openSettings();
+        return;
+    }
 
     btn.disabled = true;
     btn.textContent = "Working...";
@@ -51,7 +101,7 @@ async function runSummary() {
         summaryEl.innerHTML = `<div class="spinner">Analyzing ${emails.length} emails...</div>`;
 
         const emailDump = formatEmailsForPrompt(emails);
-        const response = await callClaude(emailDump);
+        const response = await callClaude(apiKey, emailDump);
         const { summary, todo } = splitResponse(response);
 
         summaryEl.innerHTML = renderText(summary);
@@ -194,7 +244,7 @@ Body: ${body}
 // ============================================================
 // Anthropic API call
 // ============================================================
-async function callClaude(emailDump) {
+async function callClaude(apiKey, emailDump) {
     const systemPrompt =
         "You are an executive assistant reviewing a user's unread emails. " +
         "Output EXACTLY two sections separated by the literal line '===TODO==='. " +
@@ -213,7 +263,7 @@ async function callClaude(emailDump) {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
-            "x-api-key": ANTHROPIC_API_KEY,
+            "x-api-key": apiKey,
             "anthropic-version": "2023-06-01",
             "anthropic-dangerous-direct-browser-access": "true"
         },
