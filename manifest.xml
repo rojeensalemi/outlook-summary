@@ -7,7 +7,7 @@
     xsi:type="MailApp">
 
     <!-- Generate a new GUID for yourself: https://www.guidgenerator.com/ -->
-    <Id>REPLACE-WITH-GUID-E.G.-883ef8d9-c76f-4caa-b10d-d7e085c9a5c2</Id>
+    <Id>883ef8d9-c76f-4caa-b10d-d7e085c9a5c2</Id>
     <Version>1.0.0.0</Version>
     <ProviderName>Personal</ProviderName>
     <DefaultLocale>en-US</DefaultLocale>
