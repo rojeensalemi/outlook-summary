@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inbox Summary</title>
+    <script src="https://appsforoffice.microsoft.com/lib/1/hosted/office.js"></script>
+    <style>
+        * { box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, sans-serif;
+            margin: 0;
+            padding: 12px;
+            font-size: 13px;
+            color: #323130;
+            background: #faf9f8;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .timestamp {
+            font-size: 11px;
+            color: #605e5c;
+        }
+        button.refresh {
+            background: #0078d4;
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 2px;
+            cursor: pointer;
+            font-size: 12px;
+        }
+        button.refresh:hover { background: #106ebe; }
+        button.refresh:disabled { background: #a19f9d; cursor: not-allowed; }
+        .tabs {
+            display: flex;
+            border-bottom: 1px solid #edebe9;
+            margin-bottom: 10px;
+        }
+        .tab {
+            padding: 8px 16px;
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+            font-weight: 600;
+        }
+        .tab.active {
+            border-bottom-color: #0078d4;
+            color: #0078d4;
+        }
+        .content {
+            background: white;
+            padding: 12px;
+            border: 1px solid #edebe9;
+            border-radius: 2px;
+            min-height: 300px;
+            white-space: pre-wrap;
+            line-height: 1.5;
+            font-size: 13px;
+        }
+        .pane { display: none; }
+        .pane.active { display: block; }
+        .spinner {
+            text-align: center;
+            padding: 40px;
+            color: #605e5c;
+        }
+        .error {
+            color: #a4262c;
+            padding: 8px;
+            background: #fde7e9;
+            border-left: 3px solid #a4262c;
+            margin-bottom: 8px;
+        }
+        .urgent { color: #a4262c; font-weight: 600; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <span class="timestamp" id="timestamp">Not yet run</span>
+        <button class="refresh" id="refreshBtn">Summarize</button>
+    </div>
+    <div class="tabs">
+        <div class="tab active" data-pane="summary">Summary</div>
+        <div class="tab" data-pane="todo">To-Do</div>
+    </div>
+    <div class="pane active" id="pane-summary">
+        <div class="content" id="summary-content">Click Summarize to scan your inbox.</div>
+    </div>
+    <div class="pane" id="pane-todo">
+        <div class="content" id="todo-content">Your to-do list will appear here.</div>
+    </div>
+    <script src="taskpane.js"></script>
+</body>
+</html>
